@@ -102,13 +102,13 @@ const Dashboard = () => {
                 {STAT_CARDS.map((stat, idx) => (
                     <div
                         key={idx}
-                        className="group relative bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                        className="group relative bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                     >
                         {/* Hover Gradient Overlay */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
 
                         <div className="flex justify-between items-start mb-6 relative z-10">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${stat.shadow} bg-gradient-to-br ${stat.gradient}`}>
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-lg ${stat.shadow} bg-gradient-to-br ${stat.gradient}`}>
                                 <stat.icon size={22} />
                             </div>
                             <div className="flex items-center gap-1 text-green-600 bg-green-50 px-2 py-1 rounded-lg text-xs font-bold">
@@ -133,7 +133,7 @@ const Dashboard = () => {
 
                 {/* Main Chart Section */}
                 <div className="lg:col-span-2 space-y-8">
-                    <div className="glass-panel p-8 bg-white shadow-sm border border-gray-100 rounded-2xl relative overflow-hidden h-[400px]">
+                    <div className="glass-panel p-8 bg-white shadow-sm border border-gray-100 rounded-xl relative overflow-hidden h-[400px]">
                         <div className="flex justify-between items-center mb-8">
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900">Financial Overview</h3>
@@ -173,7 +173,7 @@ const Dashboard = () => {
 
                     {/* Sub-grid for Actionable Items */}
                     <div className="grid grid-cols-2 gap-6">
-                        <div className="p-6 rounded-[2rem] bg-indigo-900 text-white relative overflow-hidden group cursor-pointer hover:shadow-xl hover:shadow-indigo-900/20 transition-all">
+                        <div className="p-6 rounded-xl bg-indigo-900 text-white relative overflow-hidden group cursor-pointer hover:shadow-xl hover:shadow-indigo-900/20 transition-all">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all"></div>
                             <div className="relative z-10">
                                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-4">
@@ -184,7 +184,7 @@ const Dashboard = () => {
                                 <div className="h-1 w-12 bg-white/30 rounded-full"></div>
                             </div>
                         </div>
-                        <div className="p-6 rounded-[2rem] bg-orange-500 text-white relative overflow-hidden group cursor-pointer hover:shadow-xl hover:shadow-orange-500/20 transition-all">
+                        <div className="p-6 rounded-xl bg-orange-500 text-white relative overflow-hidden group cursor-pointer hover:shadow-xl hover:shadow-orange-500/20 transition-all">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all"></div>
                             <div className="relative z-10">
                                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-4">
@@ -200,7 +200,7 @@ const Dashboard = () => {
 
                 {/* Right Sidebar - Activity & Notice */}
                 <div className="space-y-8">
-                    <div className="glass-panel p-6 bg-white shadow-sm border border-gray-100 rounded-[2rem] h-full flex flex-col">
+                    <div className="glass-panel p-6 bg-white shadow-sm border border-gray-100 rounded-xl h-full flex flex-col">
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
                             <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
@@ -217,7 +217,7 @@ const Dashboard = () => {
                                 { title: 'System Backup', time: 'Yesterday', type: 'system', color: 'bg-gray-500', icon: Activity },
                             ].map((item, i) => (
                                 <div key={i} className="flex gap-4 relative z-10 items-start group">
-                                    <div className={`w-12 h-12 rounded-2xl ${item.color} shadow-lg shadow-gray-200 flex items-center justify-center shrink-0 text-white scale-90 group-hover:scale-100 transition-transform`}>
+                                    <div className={`w-12 h-12 rounded-xl ${item.color} shadow-lg shadow-gray-200 flex items-center justify-center shrink-0 text-white scale-90 group-hover:scale-100 transition-transform`}>
                                         <item.icon size={18} />
                                     </div>
                                     <div className="pt-1">

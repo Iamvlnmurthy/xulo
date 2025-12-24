@@ -5,9 +5,12 @@ import {
     LayoutDashboard, LogOut, ChevronLeft
 } from 'lucide-react';
 import { NAVIGATION_MODULES } from '../../utils/navigationConfig';
+import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = () => {
     const location = useLocation();
+    const { user, logout } = useAuth();
+
     // Initialize active module based on current path, or default to first
     const getActiveModuleFromPath = () => {
         const path = location.pathname;
@@ -58,10 +61,10 @@ const Sidebar = () => {
                         `}
                     >
                         <LayoutDashboard size={20} className="mr-3" />
-                        <span className="text-sm">Dashboard</span>
+                        <span className="text-sm truncate">Dashboard</span>
                     </NavLink>
 
-                    <div className="px-4 text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-2">Modules</div>
+                    <div className="px-4 text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 mt-4">Modules</div>
 
                     {NAVIGATION_MODULES.map((module) => {
                         const isExpanded = expandedModule === module.id;
@@ -69,7 +72,7 @@ const Sidebar = () => {
                         const isActive = location.pathname.includes(module.path) || module.sections.some(s => s.items.some(i => i.path === location.pathname));
 
                         return (
-                            <div key={module.id} className="mb-1">
+                            <div key={module.id} className="mb-2">
                                 <button
                                     onClick={() => toggleModule(module.id)}
                                     className={`
@@ -82,7 +85,7 @@ const Sidebar = () => {
                                             size={20}
                                             className={`mr-3 transition-colors ${isActive ? 'text-indigo-600' : 'text-gray-400 group-hover:text-gray-600'}`}
                                         />
-                                        <span className={`text-sm font-medium tracking-wide ${isActive ? 'font-bold' : ''}`}>{module.title}</span>
+                                        <span className={`text-sm font-medium tracking-wide truncate ${isActive ? 'font-bold' : ''}`}>{module.title}</span>
                                     </div>
                                     {isExpanded ? <ChevronDown size={16} className="opacity-50" /> : <ChevronRight size={16} className="opacity-50" />}
                                 </button>
@@ -92,8 +95,8 @@ const Sidebar = () => {
                                     <div className="mt-1 ml-4 pl-4 border-l-2 border-indigo-100 space-y-4 py-2 animate-in slide-in-from-top-2 duration-200">
                                         {module.sections.map((section, idx) => (
                                             <div key={idx}>
-                                                <h4 className="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-1 pl-2">{section.title}</h4>
-                                                <div className="space-y-0.5">
+                                                <h4 className="text-xs uppercase tracking-wider text-gray-500 font-bold mb-2 pl-2">{section.title}</h4>
+                                                <div className="space-y-1">
                                                     {section.items.map((item, i) => (
                                                         <NavLink
                                                             key={i}
@@ -105,7 +108,7 @@ const Sidebar = () => {
                                                                     : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50/50'}
                                                             `}
                                                         >
-                                                            {item.label}
+                                                            <span className="truncate">{item.label}</span>
                                                         </NavLink>
                                                     ))}
                                                 </div>
@@ -118,7 +121,7 @@ const Sidebar = () => {
                     })}
 
                     {/* AI Tools Separator */}
-                    <div className="mt-6 mb-2 px-4">
+                    <div className="mt-6 mb-3 px-4">
                         <div className="h-px bg-gray-200"></div>
                     </div>
 
@@ -131,8 +134,12 @@ const Sidebar = () => {
                                 : 'text-gray-600 hover:bg-purple-50'}
               `}
                     >
-                        <Sparkles size={20} className="mr-3 text-purple-500" />
-                        <span className="text-sm">Teaching Co-Pilot</span>
+                        {({ isActive }) => (
+                            <>
+                                <Sparkles size={20} className="mr-3 text-purple-500" />
+                                <span className="text-sm truncate">AI Tools</span>
+                            </>
+                        )}
                     </NavLink>
                 </nav>
 
@@ -140,13 +147,15 @@ const Sidebar = () => {
                 <div className="p-4 bg-gradient-to-b from-white/0 to-white/80 shrink-0">
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-100 shadow-sm cursor-pointer hover:border-indigo-200 transition-colors">
                         <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xs">
-                            AD
+                            {user?.name?.charAt(0) || 'U'}
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-xs font-bold text-gray-900 truncate">Admin User</p>
-                            <p className="text-[10px] text-gray-500 truncate">admin@xulo.com</p>
+                            <p className="text-xs font-bold text-gray-900 truncate">{user?.name || 'User'}</p>
+                            <p className="text-[10px] text-gray-500 truncate">{user?.email || 'user@xulo.com'}</p>
                         </div>
-                        <LogOut size={14} className="text-gray-400 hover:text-red-500" />
+                        <button onClick={logout} className="p-1 hover:bg-gray-100 rounded-full transition-colors text-gray-400 hover:text-red-500">
+                            <LogOut size={16} />
+                        </button>
                     </div>
                 </div>
             </div>
